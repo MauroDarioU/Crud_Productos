@@ -26,6 +26,7 @@ public class ProductoController {
     // Inyecta el repositorio para acceder a la base de datos.
     private final ProductoService ProductoService;
 
+
     // Obtener todos los productos (GET /Productos)
     @GetMapping
     public List<Producto> obtenerProductos() {
@@ -35,7 +36,7 @@ public class ProductoController {
     // obtener un producto por su ID (GET /productos/{id})
     @GetMapping("/{id}")
     public ResponseEntity<Producto> obtenerProductos(@PathVariable Long id) {
-        Producto producto = ProductoService.obtenerPorId(id).orElseThrow(() -> new RuntimeException("El producto no existe"));
+      Producto producto = ProductoService.obtenerPorId(id).orElseThrow(() -> new RuntimeException("El producto no existe"));
         return ResponseEntity.ok(producto);
     }
 

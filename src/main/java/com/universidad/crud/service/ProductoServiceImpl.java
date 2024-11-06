@@ -5,10 +5,10 @@ import com.universidad.crud.repository.ProductoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.ZonedDateTime;
+
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
+
 
 //  Marca como un componente de servicio de Spring.
 @Service
@@ -24,8 +24,10 @@ public class ProductoServiceImpl implements ProductoService {
     public List<Producto> obtenerProductos() {
         return productoRepository.findAll();
     }
+
     @Override
     public Optional<Producto> obtenerPorId(Long id) {
         return productoRepository.findById(id);
     }
+
 }
