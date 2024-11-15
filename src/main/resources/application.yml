@@ -14,7 +14,7 @@ Spring:
     application:
         name: 'Crud'
     main:
-        banner-mode: 'ON'
+        banner-mode: 'CONSOLE'
 
     datasource:
         url: jdbc:mysql://localhost:3306/testdb
@@ -42,9 +42,7 @@ server:
 
 spring:
     jackson:
-        time-zone: UTC
+        time-zone: 'UTC'
 
-logging: 
-    config: classpath:log4j2.xml
 
 
