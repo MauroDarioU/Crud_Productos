@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.time.ZonedDateTime;
 
 
 //  Marca como un componente de servicio de Spring.
@@ -29,5 +30,36 @@ public class ProductoServiceImpl implements ProductoService {
     public Optional<Producto> obtenerPorId(Long id) {
         return productoRepository.findById(id);
     }
+    @Override
+    public Optional<Producto> crearProducto(Producto Producto) {
+        Producto ProductoParaGuardar = new Producto();
+        Producto.builder()
+                .nombre(Producto.getnombre())
+                .descripcion(Producto.getdescripcion())
+                .precio(Producto.getprecio())
+                .stock(Producto.getstock());
+        return Optional.of(ProductoRepository.save(ProductoParaGuardar));
+    }
 
+    @Override
+    public Optional<Producto> actualizarProducto(Long id, Producto producto) {
+        Optional<Producto> productoViejo = productoRepository.findById(id);
+        if (productoViejo.isPresent()) {
+            Producto productoParaActualizar = productoViejo.get();
+            productoParaActualizar.setnombre(producto.getnombre());
+            productoParaActualizar.setdescripcion(producto.getdescripcion());
+            productoParaActualizar.setprecio(producto.getprecio());
+            productoParaActualizar.setstock(producto.getstock());
+            productoParaActualizar.setUpdatedAt(ZonedDateTime.now());
+            return Optional.of(productoRepository.save(productoParaActualizar));
+        } else {
+            // Devuelve vacío al no encontrar el producto
+            return Optional.empty();
+        }
+    }
+    // Eliminar un producto
+    @Override
+    public void eliminarProducto(Long id) {
+        productoRepository.deleteById(id);
+    }
 }

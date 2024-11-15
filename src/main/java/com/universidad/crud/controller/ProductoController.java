@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.universidad.crud.exceptions.EntityNotFoundExceptions;
+
 import java.util.List;
 
 // Manejar solicitudes relacionadas con productos.
@@ -38,6 +40,27 @@ public class ProductoController {
     public ResponseEntity<Producto> obtenerProductos(@PathVariable Long id) {
       Producto producto = ProductoService.obtenerPorId(id).orElseThrow(() -> new RuntimeException("El producto no existe"));
         return ResponseEntity.ok(producto);
+    }
+
+    // Crear un nuevo producto
+    @PostMapping
+    public ResponseEntity<Producto> (@RequestBody Producto producto) {
+        Producto nuevoProducto = ProductoService.crearProducto(producto).orElseThrow(() -> new EntityNotFoundExceptions("error al crear el producto"));
+         return ResponseEntity.status(HttpStatus.CREATED).body(nuevoProducto);
+    }
+
+    // Actualizar producto
+       @PutMapping("/{id}")
+    public ResponseEntity<Producto>   (@PathVariable Long id, @RequestBody Producto producto) {
+        Producto productoActualizado = ProductoService.actualizarProducto(id, producto) .orElseThrow(() -> new EntityNotFoundExceptions("Problemas al actualizar el producto"));
+            return ResponseEntity.ok(productoActualizado);
+    }
+
+    //eliminar un producto por ID
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> (@PathVariable Long id) {
+        ProductoService.eliminarProducto(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

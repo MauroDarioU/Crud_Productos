@@ -2,10 +2,16 @@ package com.universidad.crud.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.antlr.v4.runtime.misc.NotNull;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
+import java.time.ZonedDateTime;
 
 //  Indica que esta clase es una entidad JPA.
 @Entity
@@ -24,15 +30,36 @@ public class Producto {
     // id es la clave primaria (PK), se genera automaticamente
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     // Atributos de la tabla
+    @NotNull(message = "Agregar un Nombre")
+    @Size(min = 1, message = "El nombre debe tener por lo menos 1 caracter")
     @Column(name = "nombre")
     private String nombre;
+
+    @NotNull(message = "Agregar una descripcion")
     @Column(name = "descripcion")
     private String descripcion;
+
+    @NotNull(message = "Agregar precio")
     @Column(name = "precio")
     private double precio;
+
+    @NotNull(message = "Agregar stock")
     @Column(name = "stock")
     private String stock;
+
+    // Fecha de creación
+    @CreatedDate
+    @Column(name = "created_at")
+    private ZonedDateTime createdAt;
+
+    // Fecha de última modificación (automática)
+    @LastModifiedDate
+    @Column(name = "updated_at")
+    private ZonedDateTime updatedAt;
+
+    public Object builder() {
+    }
 }
