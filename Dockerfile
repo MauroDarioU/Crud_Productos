@@ -5,10 +5,10 @@
  WORKDIR /app
 
  # archivo JAR al directorio de trabajo
- COPY target/Crud.jar app.jar
+ COPY target/ mi-aplicacion.jar app.jar
 
  # puerto de la aplicación
- EXPOSE 8090
+ EXPOSE 8080
 
  #  comando para ejecutar la aplicación
  CMD ["java", "-jar", "app.jar"]

@@ -19,8 +19,8 @@ public class GlobalExceptionProducto {
     // Excepciones generales
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR) // Error 500
-     public ResponseEntity<String> handleAllExceptions(Exception ex) {
+    public ResponseEntity<String> handleAllExceptions(Exception ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR); // Error 500
 
-
+    }
 }

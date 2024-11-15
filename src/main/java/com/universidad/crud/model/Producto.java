@@ -11,6 +11,7 @@ import org.antlr.v4.runtime.misc.NotNull;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
+import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 
 //  Indica que esta clase es una entidad JPA.
@@ -33,22 +34,21 @@ public class Producto {
     private Long id;
 
     // Atributos de la tabla
-    @NotNull(message = "Agregar un Nombre")
-    @Size(min = 1, message = "El nombre debe tener por lo menos 1 caracter")
+        @Size(min = 1, message = "El nombre debe tener por lo menos 1 caracter")
     @Column(name = "nombre")
     private String nombre;
 
-    @NotNull(message = "Agregar una descripcion")
+
     @Column(name = "descripcion")
     private String descripcion;
 
-    @NotNull(message = "Agregar precio")
-    @Column(name = "precio")
-    private double precio;
 
-    @NotNull(message = "Agregar stock")
+    @Column(name = "precio")
+    private BigDecimal precio;
+
+
     @Column(name = "stock")
-    private String stock;
+    private int stock;
 
     // Fecha de creación
     @CreatedDate
@@ -60,6 +60,4 @@ public class Producto {
     @Column(name = "updated_at")
     private ZonedDateTime updatedAt;
 
-    public Object builder() {
-    }
 }

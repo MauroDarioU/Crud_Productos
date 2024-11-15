@@ -31,14 +31,17 @@ public class ProductoServiceImpl implements ProductoService {
         return productoRepository.findById(id);
     }
     @Override
-    public Optional<Producto> crearProducto(Producto Producto) {
-        Producto ProductoParaGuardar = new Producto();
+    public Optional<Producto> crearProducto(Producto producto) {
+        Producto ProductoParaGuardar =
         Producto.builder()
-                .nombre(Producto.getnombre())
-                .descripcion(Producto.getdescripcion())
-                .precio(Producto.getprecio())
-                .stock(Producto.getstock());
-        return Optional.of(ProductoRepository.save(ProductoParaGuardar));
+                .nombre(producto.getNombre())
+                .descripcion(producto.getDescripcion())
+                .precio(producto.getPrecio())
+                .stock(producto.getStock())
+                .createdAt(ZonedDateTime.now())
+                .updatedAt(ZonedDateTime.now())
+                .build();
+        return Optional.of(productoRepository.save(ProductoParaGuardar));
     }
 
     @Override
@@ -46,10 +49,10 @@ public class ProductoServiceImpl implements ProductoService {
         Optional<Producto> productoViejo = productoRepository.findById(id);
         if (productoViejo.isPresent()) {
             Producto productoParaActualizar = productoViejo.get();
-            productoParaActualizar.setnombre(producto.getnombre());
-            productoParaActualizar.setdescripcion(producto.getdescripcion());
-            productoParaActualizar.setprecio(producto.getprecio());
-            productoParaActualizar.setstock(producto.getstock());
+            productoParaActualizar.setNombre(producto.getNombre());
+            productoParaActualizar.setDescripcion(producto.getDescripcion());
+            productoParaActualizar.setPrecio(producto.getPrecio());
+            productoParaActualizar.setStock(producto.getStock());
             productoParaActualizar.setUpdatedAt(ZonedDateTime.now());
             return Optional.of(productoRepository.save(productoParaActualizar));
         } else {
