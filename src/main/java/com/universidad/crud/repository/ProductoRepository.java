@@ -4,7 +4,6 @@ import com.universidad.crud.model.Producto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -24,6 +23,6 @@ public interface ProductoRepository extends JpaRepository<Producto, Long > {
     Optional<Producto> findActiveById(@Param("id") long id);
 
     // Encontrar un producto por nombre
-    @Query("SELECT u FROM Producto u LEFT JOIN FETCH u.roles WHERE u.nombre = :nombre AND u.isActive = true")
+    @Query("SELECT u FROM Producto u LEFT JOIN FETCH u.roles WHERE u.nombre = :nombre = true")
     Optional<Producto> findActiveByNombre(@Param("nombre") String nombre);
 }

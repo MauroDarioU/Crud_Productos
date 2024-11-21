@@ -62,7 +62,14 @@ public class ProductoServiceImpl implements ProductoService {
     }
     // Eliminar un producto
     @Override
-    public void eliminarProducto(Long id) {
-        productoRepository.deleteById(id);
+    public Optional<Producto> eliminarProducto(Long id) {
+        Optional<Producto> productoViejo = productoRepository.findById(id);
+        if (productoViejo.isPresent()) {
+            Producto productoParaActualizar = productoViejo.get();
+            productoParaActualizar.setUpdatedAt(ZonedDateTime.now());
+            return Optional.of(productoRepository.save(productoParaActualizar));
+        }else {
+            return Optional.empty();
+        }
     }
 }

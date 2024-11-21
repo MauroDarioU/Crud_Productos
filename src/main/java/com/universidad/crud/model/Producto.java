@@ -34,7 +34,8 @@ public class Producto {
     private Long id;
 
     // Atributos de la tabla
-        @Size(min = 1, message = "El nombre debe tener por lo menos 1 caracter")
+    @Size(min = 1, message = "El nombre debe tener por lo menos 1 caracter")
+
     @Column(name = "nombre")
     private String nombre;
 

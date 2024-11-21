@@ -7,8 +7,8 @@ info:
             source: '@java.version@'  
             target: '@java.version@' 
 
-    version: '1.0.0'
-    name: 'Crud'
+        version: '1.0.0'
+        name: 'Crud'
 
 Spring:
     application:
@@ -19,7 +19,7 @@ Spring:
     datasource:
         url: jdbc:mysql://localhost:3306/testdb
         username: user
-        password: pass
+        password: password
         driver-class-name: com.mysql.cj.jdbc.Driver
 
     jpa: 
@@ -29,20 +29,25 @@ Spring:
             ddl-auto: update
 
     sql:
-        init: 
+        init:
+            mode: always
             platform: mysql
             schema-locations: classpath:schema.sql
             data-locations: classpath:data.sql
+    doc:
+         swagger-ui:
+         patch: /swagger-ui/index.html
+         enable: true
 
-server:
-    port: 8090
-    compression: 
-        enabled: true 
-
-
-spring:
-    jackson:
+    user:
         time-zone: 'UTC'
 
+server:
+   port: 8090
+   compression:
+        enabled: true
 
+
+logging:
+    config: classpath:log4j2.xml
 

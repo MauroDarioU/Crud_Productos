@@ -2,7 +2,6 @@ package com.universidad.crud.service;
 
 import com.universidad.crud.model.Producto;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,5 +11,5 @@ public interface ProductoService {
     Optional<Producto> obtenerPorId(Long id);
     Optional<Producto> crearProducto(Producto producto);
     Optional<Producto> actualizarProducto(Long id, Producto producto);
-    void eliminarProducto(Long id);
+    Optional<Producto> eliminarProducto(Long id);
 }
